@@ -11,6 +11,7 @@ __pycache__
 .pytest_cache
 .venv
 *.pyc
+*.tsbuildinfo
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
