@@ -4,6 +4,13 @@
 
 Monorepo for the Pinterest AI Engine MVP.
 
+## Deployed Links
+
+- Frontend preview: [https://frontend-enz43kjf7-125015164-4269s-projects.vercel.app](https://frontend-enz43kjf7-125015164-4269s-projects.vercel.app)
+- Frontend alias: [https://frontend-125015164-4269-125015164-4269s-projects.vercel.app](https://frontend-125015164-4269-125015164-4269s-projects.vercel.app)
+- Vercel inspect: [https://vercel.com/125015164-4269s-projects/frontend/7Qz9gXJP7eaAaTuKSF7h42Wm8ZYz](https://vercel.com/125015164-4269s-projects/frontend/7Qz9gXJP7eaAaTuKSF7h42Wm8ZYz)
+- Backend API: not deployed yet
+
 ## Summary
 
 Build a greenfield single-user SaaS MVP with:
@@ -75,22 +82,55 @@ Important product decisions locked:
 - When credentials are absent, the app falls back to deterministic mock data so the UI and flows stay testable.
 - Pinterest publish/analytics, Stripe billing, Cloudinary assets, OpenAI content, and Amazon Creators matching are wired behind env-driven adapters.
 
-## Required credentials
+## APIs and credentials needed for full functionality
 
-- `MONGO_URI`
+### Core app
+
+- `MONGO_URI`: MongoDB Atlas or local Mongo connection string
+- `JWT_SECRET`: session signing secret for auth cookies and tokens
+- `ENCRYPTION_KEY`: at least 32 characters for encrypting stored third-party secrets
+- Optional `SENTRY_DSN`: error monitoring for backend and frontend
+
+### OpenAI
+
 - `OPENAI_API_KEY`
+- Optional `OPENAI_MODEL`: defaults to `gpt-4o-mini`
+- Used for title, description, and hashtag generation
+
+### Pinterest
+
 - `PINTEREST_APP_ID`
 - `PINTEREST_APP_SECRET`
 - `PINTEREST_REDIRECT_URI`
+- Needed for OAuth, board listing, publishing, and analytics sync
+
+### Amazon Creators / affiliate
+
 - `AMAZON_CREATORS_API_KEY`
 - `AMAZON_CREATORS_API_SECRET`
 - `AMAZON_ASSOCIATE_TAG`
+- Optional `AMAZON_MARKETPLACE`: defaults to `amazon.in`
+- Needed for affiliate product discovery and payout attribution
+
+### Cloudinary
+
 - `CLOUDINARY_CLOUD_NAME`
 - `CLOUDINARY_API_KEY`
 - `CLOUDINARY_API_SECRET`
+- Needed to store and serve generated pin images
+
+### Stripe
+
 - `STRIPE_SECRET_KEY`
 - `STRIPE_PUBLISHABLE_KEY`
 - `STRIPE_WEBHOOK_SECRET`
-- `JWT_SECRET`
-- `ENCRYPTION_KEY`
-- Optional: `SENTRY_DSN`
+- `STRIPE_PRICE_PRO_MONTHLY`
+- Needed for Free/Pro checkout, billing portal, and subscription state sync
+
+## What is still mocked until keys are added
+
+- OpenAI copy generation falls back to deterministic sample content
+- Pinterest boards, publish, and analytics currently use mock adapters
+- Amazon affiliate matching currently uses fallback ranked products
+- Cloudinary upload falls back to generated inline image data
+- Stripe checkout and billing portal fall back to mock URLs

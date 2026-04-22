@@ -1,10 +1,4 @@
-import type {
-  BillingStateDto,
-  DashboardOverviewDto,
-  KeywordDto,
-  PinDto,
-  PipelineRunDto
-} from "@pinengine/contracts";
+import type { BillingStateDto, DashboardOverviewDto, KeywordDto, PinDto, PipelineRunDto } from "./types";
 import { mockBilling, mockKeywords, mockOverview, mockPins, mockRuns } from "./mock";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { DashboardOverviewDto } from "@pinengine/contracts";
+import type { DashboardOverviewDto } from "@/lib/types";
 
 const colorMap = {
   trend_discovery: "#14c4ff",
@@ -19,7 +19,7 @@ export function DashboardOverview({ overview }: { overview: DashboardOverviewDto
         <MetricCard title="Pins published" value={overview.stats.pinsPublished} sub="+18 this week" color="#14c4ff" />
         <MetricCard title="Avg CTR" value={`${overview.stats.avgCtr}%`} sub="+0.4% vs last wk" color="#f7a928" />
         <MetricCard title="Affiliate clicks" value={overview.stats.affiliateClicks.toLocaleString()} sub="+12% MoM" color="#56d364" />
-        <MetricCard title="Est. revenue" value={`₹${overview.stats.estimatedRevenue.toLocaleString()}`} sub="~ this month" color="#ff5470" />
+        <MetricCard title="Est. revenue" value={`Rs${overview.stats.estimatedRevenue.toLocaleString()}`} sub="~ this month" color="#ff5470" />
       </div>
 
       <div className="two-col">
@@ -30,7 +30,7 @@ export function DashboardOverview({ overview }: { overview: DashboardOverviewDto
               <Link key={stage.stage} href={`/dashboard/architecture?focus=${stage.stage}`} className="pipeline-row">
                 <span className="pipeline-dot" style={{ background: colorMap[stage.stage] ?? "#94a3b8" }} />
                 <div>
-                  <div>{`${index + 1} — ${toLabel(stage.stage)}`}</div>
+                  <div>{`${index + 1} - ${toLabel(stage.stage)}`}</div>
                   <div className="muted">{stage.message}</div>
                 </div>
                 <div className="bar" style={{ width: 140 }}>
@@ -87,7 +87,7 @@ export function DashboardOverview({ overview }: { overview: DashboardOverviewDto
 
       <div className="three-col">
         <section className="panel section">
-          <h2 className="section-title">CTR Trend — Last 7 Days</h2>
+          <h2 className="section-title">CTR Trend - Last 7 Days</h2>
           <div className="chart">
             {overview.ctrSeries.map((point) => (
               <div key={point.label} className="chart-col">
@@ -105,9 +105,7 @@ export function DashboardOverview({ overview }: { overview: DashboardOverviewDto
             {overview.topProducts.map((product) => (
               <div key={product.asin} className="product-row">
                 <div>{product.title}</div>
-                <div className="muted">
-                  ★ {product.rating} · {product.price}
-                </div>
+                <div className="muted">Star {product.rating} - {product.price}</div>
               </div>
             ))}
             <button className="btn">Fetch More</button>

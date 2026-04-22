@@ -1,10 +1,4 @@
-import type {
-  BillingStateDto,
-  DashboardOverviewDto,
-  KeywordDto,
-  PinDto,
-  PipelineRunDto
-} from "@pinengine/contracts";
+import type { BillingStateDto, DashboardOverviewDto, KeywordDto, PinDto, PipelineRunDto } from "./types";
 
 export const mockOverview: DashboardOverviewDto = {
   stats: {
@@ -37,7 +31,7 @@ export const mockOverview: DashboardOverviewDto = {
     },
     {
       id: "pin-2",
-      title: "Best Budget Headphones Under ₹3000",
+      title: "Best Budget Headphones Under Rs3000",
       description: "Affordable sound picks with strong reviews and gifting potential.",
       hashtags: ["#budgettech", "#headphones", "#amazonfinds", "#creatorengine", "#saveit"],
       imageUrl: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=80",
@@ -63,7 +57,7 @@ export const mockOverview: DashboardOverviewDto = {
     {
       asin: "1",
       title: "JBL Tune 510BT",
-      price: "₹180",
+      price: "Rs180",
       rating: 4.6,
       reviews: 1020,
       affiliateUrl: "#",
@@ -72,7 +66,7 @@ export const mockOverview: DashboardOverviewDto = {
     {
       asin: "2",
       title: "Logitech M235",
-      price: "₹90",
+      price: "Rs90",
       rating: 4.4,
       reviews: 1440,
       affiliateUrl: "#",

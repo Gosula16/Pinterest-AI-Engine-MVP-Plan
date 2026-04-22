@@ -1,20 +1,23 @@
 {
-  "extends": "../tsconfig.base.json",
   "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
     "jsx": "preserve",
     "allowJs": false,
     "incremental": true,
-    "baseUrl": ".",
-    "rootDir": "..",
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@pinengine/contracts": [
-        "../contracts/src/index.ts"
-      ],
       "@/*": [
         "./*"
       ]
@@ -31,8 +34,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
-    "../contracts/src/**/*.ts"
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
