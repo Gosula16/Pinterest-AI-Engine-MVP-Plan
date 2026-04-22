@@ -1,14 +1,6 @@
-type AffiliateProduct = {
-  asin: string;
-  title: string;
-  price: string;
-  rating: number;
-  reviews: number;
-  affiliateUrl: string;
-  imageUrl: string;
-};
+import { filterAffiliateProducts, type AffiliateCandidate } from "./affiliateFilters.js";
 
-const fallbackProducts: AffiliateProduct[] = [
+const fallbackProducts: AffiliateCandidate[] = [
   {
     asin: "AMZ-001",
     title: "Anker Power Bank",
@@ -29,11 +21,13 @@ const fallbackProducts: AffiliateProduct[] = [
   }
 ];
 
-export async function searchAffiliateProducts(keyword: string): Promise<AffiliateProduct[]> {
-  return fallbackProducts.map((product, index) => ({
-    ...product,
-    asin: `${product.asin}-${index + 1}`,
-    title: `${product.title} for ${keyword}`
-  }));
+export async function searchAffiliateProducts(keyword: string): Promise<AffiliateCandidate[]> {
+  return filterAffiliateProducts(
+    fallbackProducts.map((product, index) => ({
+      ...product,
+      asin: `${product.asin}-${index + 1}`,
+      title: `${product.title} for ${keyword}`
+    }))
+  );
 }
 

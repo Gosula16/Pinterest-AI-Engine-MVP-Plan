@@ -2,13 +2,20 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": "..",
     "types": [
       "node"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@pinengine/contracts": [
+        "../contracts/src/index.ts"
+      ]
+    }
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "../contracts/src/**/*"
   ]
 }
 

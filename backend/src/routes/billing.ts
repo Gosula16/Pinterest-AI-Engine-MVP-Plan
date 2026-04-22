@@ -21,6 +21,6 @@ billingRouter.post("/checkout", requireAuth, async (req, res) => {
 
 billingRouter.post("/portal", requireAuth, async (req, res) => {
   const subscription = await Subscription.findOne({ userId: req.auth!.userId }).lean();
-  return ok(res, await createPortalSession(subscription?.stripeCustomerId));
+  return ok(res, await createPortalSession(subscription?.stripeCustomerId ?? undefined));
 });
 

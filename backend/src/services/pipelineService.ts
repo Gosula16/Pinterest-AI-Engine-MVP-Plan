@@ -4,6 +4,8 @@ import { discoverTrends } from "./trendService.js";
 import { generatePinCopy } from "./contentService.js";
 import { searchAffiliateProducts } from "./amazonService.js";
 import { renderPinImage } from "./imageService.js";
+import { User } from "../models/User.js";
+import { selectNextScheduleSlot } from "./schedulerService.js";
 
 const stageOrder = [
   "trend_discovery",
@@ -15,6 +17,7 @@ const stageOrder = [
 ] as const;
 
 export async function runPipeline(userId: string, niche: string) {
+  const user = await User.findById(userId).lean();
   const run = await PipelineRun.create({
     userId,
     niche,
@@ -83,7 +86,10 @@ export async function runPipeline(userId: string, niche: string) {
 
     await markStage("queue_schedule", "running");
     pin.status = "queued";
-    pin.scheduledFor = new Date(Date.now() + 2 * 60 * 60 * 1000);
+    pin.scheduledFor = selectNextScheduleSlot(new Date(), user?.settings?.postingWindows ?? {
+      weekday: ["20:00", "21:00", "22:00"],
+      weekend: ["14:00", "15:00", "16:00"]
+    });
     await pin.save();
     await markStage("queue_schedule", "completed", "Pin queued for schedule");
 

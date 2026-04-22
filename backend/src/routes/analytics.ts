@@ -23,7 +23,8 @@ analyticsRouter.get("/", requireAuth, async (req, res) => {
 });
 
 analyticsRouter.post("/sync", requireAuth, async (req, res) => {
-  const pins = await syncAnalytics(req.auth!.userId);
-  return ok(res, pins);
+  const payload = await syncAnalytics(req.auth!.userId);
+  return ok(res, payload);
 });
+
 

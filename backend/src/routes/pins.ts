@@ -51,7 +51,7 @@ pinsRouter.post("/:id/publish", requireAuth, async (req, res) => {
 
   const published = await publishPin({
     title: pin.title,
-    boardId: pin.boardId,
+    boardId: pin.boardId ?? undefined,
     imageUrl: pin.imageUrl
   });
 
